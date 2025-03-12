@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ProjectThumbnail from '@/component/projectThumbnail'
+import css from './home.css'
 
 export default function Home() {
     const [projects, setProjects] = useState([])
@@ -9,8 +10,11 @@ export default function Home() {
     }, [])
 
     return <div>
-        <div>
+        <div >
             最近项目
+        </div>
+        <div className={css.createProject}>
+            +New
         </div>
         { projects.map((project) => {
             return <ProjectThumbnail project={project} />

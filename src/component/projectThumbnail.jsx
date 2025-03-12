@@ -10,7 +10,7 @@ function ProjectThumbnail(props) {
         </div>
         {
             props.project.imgUrl && props.project.import !== '' ?
-                <image></image> : <image src={}/>
+                <image></image> : <image />
         }
     </>
 }

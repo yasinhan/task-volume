@@ -12,12 +12,16 @@ function createWindow() {
         },
     })
 
-    if (process.env.VITE_DEV_SERVER_URL) {
-        win.loadURL(process.env.VITE_DEV_SERVER_URL)
+    const isDev = process.env.NODE_ENV === 'development'
+
+    console.log(process.env.NODE_ENV)
+    if (isDev) {
+        win.loadURL('http://localhost:5173')
         win.webContents.openDevTools()
     } else {
-        win.loadFile(path.join(__dirname, '../dist/index.html'))
+        win.loadFile('dist/index.html')
     }
+
 }
 
 app.whenReady().then(createWindow)
