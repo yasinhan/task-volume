@@ -9,16 +9,26 @@ export default function Home() {
 
     const navigate = useNavigate()
 
+    const loadProjects = async () => {
+        const res = await projectApi.getAllProjects()
+        setProjects(res)
+    }
+
     useEffect(() => {
-        const projects = projectApi.getAllProjects()
-        setProjects(projects)
+        loadProjects()
     }, [])
 
-    const handleAddNewProject = () => {
-        const newProject = projectApi.createProject()
+    const handleAddNewProject = async () => {
+        const newId = projects.length > 0 ? projects.at(-1).id + 1 : 1
+
+        const newProject = await projectApi.createProject(newId)
         if (newProject && newProject.id) {
             navigate(`/detail/${newProject.id}`)
         }
+    }
+
+    const switchToProject = (id) => {
+        navigate(`/detail/${id}`)
     }
 
     return <div className='page'>
@@ -31,7 +41,7 @@ export default function Home() {
             </div>
             { projects && projects.length > 0 && projects.map((project, i) => {
                 if (i <= 5) {
-                    return <ProjectThumbnail project={project} />
+                    return <ProjectThumbnail project={project} switch={() => switchToProject(project.id)} />
                 }
             })}
         </div>

@@ -21,7 +21,7 @@
     display: flex;              /* 启用 flexbox 布局 */
     justify-content: center;    /* 水平居中 */
     align-items: center;
-    border: 1px solid #505050;
+    border: 2px dashed #505050;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
     cursor: pointer;

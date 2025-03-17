@@ -1,18 +1,19 @@
 import React from 'react'
+import './projectThumbnail.css'
 
 function ProjectThumbnail(props) {
-    return <>
+    return <div className='container' onClick={props.switch}>
         <div>
-            {props.project.name}
+            {props.project.projectName ?? '空项目'}
         </div>
         <div>
             {props.project.createTime}
         </div>
         {
             props.project.imgUrl && props.project.import !== '' ?
-                <image></image> : <image />
+                <></> : <></>
         }
-    </>
+    </div>
 }
 
 export default ProjectThumbnail

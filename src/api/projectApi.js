@@ -1,4 +1,5 @@
 export const projectApi = {
     getAllProjects: () => window.projectAPI.getAll(),
-    createProject: () => window.projectAPI.create()
+    createProject: (id) => window.projectAPI.create(id),
+    getProject: (id) => window.projectAPI.get(id)
 }

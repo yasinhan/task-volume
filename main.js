@@ -46,7 +46,7 @@ function readFile() {
 }
 
 function writeFile(content) {
-    fs.writeFileSync(jsonFilePath, content)
+    fs.writeFileSync(jsonFilePath, JSON.stringify(content))
 }
 
 ipcMain.handle('project:getAll', async () => {
@@ -55,7 +55,6 @@ ipcMain.handle('project:getAll', async () => {
 })
 
 ipcMain.handle('project:addNew', async (event, id) => {
-    console.log(event, id)
     const content = await readFile()
     const projects = content['projects']
     const exist = projects.find(item => item.id === id)
@@ -68,6 +67,15 @@ ipcMain.handle('project:addNew', async (event, id) => {
     content['projects'] = projects
     writeFile(content)
     return { id: id }
+})
+
+ipcMain.handle('project:get', async (event, id) => {
+    const content = await readFile()
+    console.log(id)
+    console.log(content['projects'])
+    const res = content['projects'].find(item => item.id === Number(id))
+    console.log(res)
+    return res
 })
 
 app.whenReady().then(createWindow)
