@@ -2,6 +2,7 @@ import './App.css'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import Home from '@/pages/home'
 import ProjectDetail from '@/pages/projectDetail'
+import 'antd/dist/reset.css'
 
 function App() {
 

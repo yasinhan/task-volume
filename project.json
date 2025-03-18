@@ -1,1 +1,24 @@
-{"projects":[{"id":1,"projectName":"桐庐-民宿"},{"id":2},{"id":3}],"partners":[]}
+{
+  "projects": [
+    {
+      "id": 1,
+      "projectName": "桐庐-民宿",
+      "stages": [
+        {
+          "stageName": "概念阶段",
+          "percentage": 30,
+          "nodes": [{
+            "name": "文本节点"
+          }]
+        }
+      ]
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ],
+  "partners": []
+}

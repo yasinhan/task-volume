@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { projectApi } from '@/api/projectApi'
+import ProjectStage from '@/component/projectStage'
+import EditableText from '@/component/common/editableText'
 
 export default function ProjectDetail() {
     const { id } = useParams()
@@ -8,17 +10,12 @@ export default function ProjectDetail() {
 
     const [project, setProject] = useState({})
 
-    const loadProject = async (id) => {
-        const res = await projectApi.getProject(id)
-        console.log(res)
-        if (res) {
-            setProject(res)
-        }
-    }
-
     useEffect(() => {
-        loadProject(id)
+        projectApi.getProject(id).then((res) => {
+            setProject(res)
+        })
     }, [id])
+
 
     const saveProject = () => {
 
@@ -30,7 +27,7 @@ export default function ProjectDetail() {
             stages: [...project.stages, {
                 stageName: '',
                 percentage: 0,
-                nodes: []
+                nodes: [],
             }],
         })
     }
@@ -45,15 +42,12 @@ export default function ProjectDetail() {
             <div>
                 项目名称
             </div>
-            <div>
-                {project.projectName}
-            </div>
+            <EditableText value={project.projectName ?? '空项目'}
+                          setValue={(value) => setProject({ ...project, projectName: value })} />
         </div>
         {
             project.stages && project.stages.map((stage, index) => {
-                return <div>
-
-                </div>
+                return <ProjectStage stage={stage} key={index} />
             })
         }
         <div></div>
