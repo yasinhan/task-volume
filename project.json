@@ -5,10 +5,20 @@
       "projectName": "桐庐-民宿",
       "stages": [
         {
+          "stageIndex": 1,
           "stageName": "概念阶段",
           "percentage": 30,
           "nodes": [{
-            "name": "文本节点"
+            "nodeName": "文本",
+            "percentage": 40,
+            "workItems": [{
+              "itemName": "沟通",
+              "arrange": [{
+
+              }]
+            }]
+          },{
+            "name": "意向"
           }]
         }
       ]
