@@ -14,7 +14,8 @@
             "workItems": [{
               "itemName": "沟通",
               "arrange": [{
-
+                "owner": "Nicole",
+                "percentage": 100
               }]
             }]
           },{
@@ -30,5 +31,5 @@
       "id": 3
     }
   ],
-  "partners": []
+  "partners": ["Nicole", "JingChen"]
 }
