@@ -37,7 +37,7 @@ export default function EditablePercent(props) {
             <>
                 <div>{props.value}%</div>
                 <EditOutlined
-                    style={{ color: '#1890ff', cursor: 'pointer' }}
+                    style={{ cursor: 'pointer' }}
                     onClick={() => setEditing(true)}
                 />
             </>
