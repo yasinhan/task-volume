@@ -1,0 +1,25 @@
+.nodeContainer {
+    width: 100%;
+    border-bottom: 1px solid #888888;
+    display: flex;
+}
+
+.nodeInfo {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    width: 30%;
+    border-right: 1px solid #888888;
+}
+
+.nodeName {
+    border-right: 1px solid #888888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nodePercent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

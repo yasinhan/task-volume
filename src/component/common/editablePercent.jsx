@@ -20,7 +20,6 @@ export default function EditablePercent(props) {
         {editing ?
             <>
                 <InputNumber
-                    size={'small'}
                     value={editingNum}
                     onChange={value => setEditingNum(value)}
                     onPressEnter={handleSave}

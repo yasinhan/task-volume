@@ -24,7 +24,6 @@ export default function EditableText(props) {
         {editing ?
             <>
                 <Input
-                    size={'small'}
                     value={editingText}
                     onChange={e => setEditingText(e.target.value)}
                     onPressEnter={handleSave}

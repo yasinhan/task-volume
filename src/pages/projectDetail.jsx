@@ -18,20 +18,33 @@ export default function ProjectDetail() {
         })
     }, [id])
 
+    useEffect(() => {
+        console.log(project)
+    }, [project])
 
     const saveProject = () => {
-
+        projectApi.saveProject(project).then(() => {
+            projectApi.getProject(id).then((res) => {
+                setProject(res)
+            })
+        })
     }
 
     const addStage = () => {
+        const newStage = project.stages && project.stages.length > 0 ? [...project.stages, {
+            stageIndex: project.stages.at(-1).stageIndex + 1,
+            stageName: '',
+            percentage: 0,
+            nodes: [],
+        }] : [{
+            stageIndex: 1,
+            stageName: '',
+            percentage: 0,
+            nodes: [],
+        }]
         setProject({
             ...project,
-            stages: [...project.stages, {
-                stageIndex: project.stages.at(-1).stageIndex + 1,
-                stageName: '',
-                percentage: 0,
-                nodes: [],
-            }],
+            stages: newStage,
         })
     }
 
@@ -42,7 +55,7 @@ export default function ProjectDetail() {
                 .map(item => item.stageIndex < index ? item : {
                     ...item,
                     stageIndex: item.stageIndex - 1,
-                } )
+                }),
         })
     }
 
@@ -57,10 +70,10 @@ export default function ProjectDetail() {
         navigate(`/`)
     }
 
-    return <div className='page'>
+    return <div className="page">
         <button onClick={back}>返回</button>
-        <div className='header'>
-            <div className='nameTitle'>
+        <div className="header">
+            <div className="nameTitle">
                 项目名称:
             </div>
             <EditableText value={project.projectName ?? '空项目'}
@@ -68,10 +81,10 @@ export default function ProjectDetail() {
         </div>
         {
             project.stages && project.stages.map((stage, index) => {
-                return <ProjectStage stage={stage} key={index} setStage={updateStage}/>
+                return <ProjectStage stage={stage} key={index} setStage={updateStage} removeStage={removeStage} />
             })
         }
-        <div className='addStageContainer' onClick={addStage}><PlusOutlined />添加阶段</div>
+        <div className="addStageContainer" onClick={addStage}><PlusOutlined />添加阶段</div>
     </div>
 
 }
