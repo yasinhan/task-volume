@@ -4,6 +4,7 @@ import { projectApi } from '@/api/projectApi'
 import ProjectStage from '@/component/projectStage'
 import EditableText from '@/component/common/editableText'
 import './project.css'
+import { PlusOutlined } from '@ant-design/icons'
 
 export default function ProjectDetail() {
     const { id } = useParams()
@@ -26,10 +27,22 @@ export default function ProjectDetail() {
         setProject({
             ...project,
             stages: [...project.stages, {
+                stageIndex: project.stages.at(-1).stageIndex + 1,
                 stageName: '',
                 percentage: 0,
                 nodes: [],
             }],
+        })
+    }
+
+    const removeStage = (index) => {
+        setProject({
+            ...project,
+            stages: project.stages.filter(item => item.stageIndex !== index)
+                .map(item => item.stageIndex < index ? item : {
+                    ...item,
+                    stageIndex: item.stageIndex - 1,
+                } )
         })
     }
 
@@ -58,7 +71,7 @@ export default function ProjectDetail() {
                 return <ProjectStage stage={stage} key={index} setStage={updateStage}/>
             })
         }
-        <div></div>
+        <div className='addStageContainer' onClick={addStage}><PlusOutlined />添加阶段</div>
     </div>
 
 }

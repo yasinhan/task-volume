@@ -30,27 +30,21 @@ export default function EditableText(props) {
                     onPressEnter={handleSave}
                     autoFocus
                 />
-                <Tooltip title="保存">
-                    <CheckOutlined
-                        style={{ color: '#52c41a', cursor: 'pointer' }}
-                        onClick={handleSave}
-                    />
-                </Tooltip>
-                <Tooltip title="取消">
-                    <CloseOutlined
-                        style={{ color: '#ff4d4f', cursor: 'pointer' }}
-                        onClick={handleCancel}
-                    />
-                </Tooltip>
+                <CheckOutlined
+                    style={{ color: '#52c41a', cursor: 'pointer' }}
+                    onClick={handleSave}
+                />
+                <CloseOutlined
+                    style={{ color: '#ff4d4f', cursor: 'pointer' }}
+                    onClick={handleCancel}
+                />
             </> :
             <>
                 <div>{props.value}</div>
-                <Tooltip title="编辑">
-                    <EditOutlined
-                        style={{ color: '#1890ff', cursor: 'pointer' }}
-                        onClick={() => setEditing(true)}
-                    />
-                </Tooltip>
+                <EditOutlined
+                    style={{ color: '#1890ff', cursor: 'pointer' }}
+                    onClick={() => setEditing(true)}
+                />
             </>
         }
     </div>

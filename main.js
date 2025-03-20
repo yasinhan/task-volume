@@ -71,11 +71,14 @@ ipcMain.handle('project:addNew', async (event, id) => {
 
 ipcMain.handle('project:get', async (event, id) => {
     const content = await readFile()
-    console.log(id)
-    console.log(content['projects'])
-    const res = content['projects'].find(item => item.id === Number(id))
-    console.log(res)
-    return res
+    return content['projects'].find(item => item.id === Number(id))
+})
+
+ipcMain.handle('project:save', async (event, project) => {
+    const content = await readFile()
+    const prevProjects = content['projects']
+    content['projects'] = prevProjects.map(item => item.id === project.id ? project : item)
+    writeFile(content)
 })
 
 app.whenReady().then(createWindow)

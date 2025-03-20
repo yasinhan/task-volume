@@ -11,7 +11,7 @@ function ProjectStage(props) {
             <EditablePercent value={props.stage.percentage ?? 0}
                              setValue={(value) => props.setStage({ ...props.stage, percentage: value })} />
         </div>
-        <div className=''>
+        <div className='nodes'>
 
         </div>
     </div>
