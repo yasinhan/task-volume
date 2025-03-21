@@ -13,6 +13,7 @@
             "nodeName": "文本",
             "percentage": 40,
             "workItems": [{
+              "itemIndex": 1,
               "itemName": "沟通",
               "percentage": 50,
               "arrange": [{
@@ -21,6 +22,7 @@
                 "actualPercent": 0
               }]
             },{
+              "itemIndex": 2,
               "itemName": "手稿",
               "percentage": 50,
               "arrange": [{

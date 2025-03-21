@@ -7,6 +7,29 @@ import ProjectNode from '@/component/projectNode'
 
 function ProjectStage(props) {
 
+    const participantNums = props.stage.nodes.reduce((result, node) => {
+        let arrangeLength = 0;
+
+        if (!node.workItems || node.workItems.length === 0) {
+            arrangeLength = 1;
+        } else {
+            arrangeLength = node.workItems.reduce((sum, workItem) => {
+                if (!workItem.arrange || workItem.arrange.length === 0) {
+                    return sum + 1;
+                } else {
+                    return sum + workItem.arrange.length;
+                }
+            }, 0);
+        }
+
+        result[node.nodeIndex] = arrangeLength;
+        return result;
+    }, {});
+
+    const sum = Object.values(participantNums).reduce((total, value) => {
+        return total + value;
+    }, 0);
+
     const setNode = (node) => {
         const newNodes = props.stage.nodes.map(item => item.nodeIndex === node.nodeIndex ? node : item)
         props.setStage({
@@ -15,7 +38,7 @@ function ProjectStage(props) {
         })
     }
 
-    return <div className='stageContainer'>
+    return <div className='stageContainer' style={{ height: `${sum * 50}px` }}>
         <div className='stageTitle'>
             <EditableText value={props.stage.stageName ?? '阶段'}
                           setValue={(value) => props.setStage({ ...props.stage, stageName: value })} />
@@ -25,7 +48,7 @@ function ProjectStage(props) {
         <div className='nodes'>
             {props.stage.nodes && props.stage.nodes.length > 0 &&
                 props.stage.nodes.map((node, index) => {
-                    return <ProjectNode node={node} index={index} setNode={setNode} />
+                    return <ProjectNode node={node} index={index} setNode={setNode} num={participantNums[node.nodeIndex]}/>
                 })
             }
         </div>

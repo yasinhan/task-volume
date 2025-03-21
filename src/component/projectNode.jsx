@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import EditableText from '@/component/common/editableText'
 import './projectNode.css'
 import EditablePercent from '@/component/common/editablePercent'
+import WorkItem from '@/component/workItem'
 
 function ProjectNode(props) {
 
-    const height = props.node.percentage && props.node.percentage > 0 ? props.node.percentage : 100
+    const setWorkItem = (workItem) => {
+        const newItems = props.node.workItems.map(item => item.itemIndex === workItem.itemIndex ? workItem : item)
+        props.setNode({
+            ...props.node,
+            workItems: newItems
+        })
+    }
 
-    return <div className='nodeContainer' style={{ height: `${height}%` }}>
+    return <div className='nodeContainer' style={{ height: `${props.num * 50}px` }}>
         <div className='nodeInfo'>
             <div className='nodeName'>
                 <EditableText value={props.node.nodeName ?? '节点'}
@@ -20,7 +27,10 @@ function ProjectNode(props) {
         </div>
         <div className='workItem'>
             {
-
+                props.node.workItems && props.node.workItems.length > 0 ?
+                props.node.workItems.map((item) => {
+                    return <WorkItem workItem={item} setWorkItem={setWorkItem} totalNum={props.num} />
+                }) : <></>
             }
         </div>
     </div>

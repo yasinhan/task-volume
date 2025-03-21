@@ -1,6 +1,6 @@
 .stageContainer {
     width: 100%;
-    min-height: 200px;
+    min-height: 50px;
     margin-top: 5px;
     border: 1px solid #888888;
     display: flex;
@@ -19,7 +19,6 @@
 
 .nodes {
     width: 78%;
-    flex-grow: 1;
     border-right: 1px solid #888888;
 }
 
