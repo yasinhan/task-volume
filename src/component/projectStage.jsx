@@ -38,6 +38,24 @@ function ProjectStage(props) {
         })
     }
 
+    const addNewNode = () => {
+        const newNode = props.stage.nodes && props.stage.nodes > 0 ? [...props.stage.nodes, {
+            nodeIndex: props.stage.nodes.at(-1).nodeIndex + 1,
+            nodeName: '',
+            percentage: 0,
+            workItems: [],
+        }] : [{
+            nodeIndex: 1,
+            nodeName: '',
+            percentage: 0,
+            workItems: [],
+        }]
+        props.setStage({
+            ...props.stage,
+            nodes: newNode,
+        })
+    }
+
     return <div className='stageContainer' style={{ height: `${sum * 50}px` }}>
         <div className='stageTitle'>
             <EditableText value={props.stage.stageName ?? '阶段'}
@@ -46,10 +64,10 @@ function ProjectStage(props) {
                              setValue={(value) => props.setStage({ ...props.stage, percentage: value })} />
         </div>
         <div className='nodes'>
-            {props.stage.nodes && props.stage.nodes.length > 0 &&
+            {props.stage.nodes && props.stage.nodes.length > 0 ?
                 props.stage.nodes.map((node, index) => {
                     return <ProjectNode node={node} index={index} setNode={setNode} num={participantNums[node.nodeIndex]}/>
-                })
+                }) : <div className='emptyNodes' onClick={addNewNode}></div>
             }
         </div>
         <div onClick={() => props.removeStage(props.stage.stageIndex)} className='removeContainer'>

@@ -18,10 +18,6 @@ export default function ProjectDetail() {
         })
     }, [id])
 
-    useEffect(() => {
-        console.log(project)
-    }, [project])
-
     const saveProject = () => {
         projectApi.saveProject(project).then(() => {
             projectApi.getProject(id).then((res) => {
@@ -68,12 +64,13 @@ export default function ProjectDetail() {
 
     const back = () => {
         navigate(`/`)
+        saveProject()
     }
 
-    return <div className="page">
+    return <div className='page'>
         <button onClick={back}>返回</button>
-        <div className="header">
-            <div className="nameTitle">
+        <div className='header'>
+            <div className='nameTitle'>
                 项目名称:
             </div>
             <EditableText value={project.projectName ?? '空项目'}
@@ -84,7 +81,7 @@ export default function ProjectDetail() {
                 return <ProjectStage stage={stage} key={index} setStage={updateStage} removeStage={removeStage} />
             })
         }
-        <div className="addStageContainer" onClick={addStage}><PlusOutlined />添加阶段</div>
+        <div className='addStageContainer' onClick={addStage}><PlusOutlined />添加阶段</div>
     </div>
 
 }

@@ -22,6 +22,12 @@
     border-right: 1px solid #888888;
 }
 
+.emptyNodes {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
 .removeContainer {
     width: 2%;
     display: flex;

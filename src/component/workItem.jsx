@@ -19,6 +19,26 @@ function WorkItem(props) {
                                  setValue={(value) => props.setWorkItem({ ...props.workItem, percentage: value })} />
             </div>
         </div>
+        <div className='arrangeContainer'>
+            {
+                props.workItem.arrange && props.workItem.arrange.length > 0 ?
+                    props.workItem.arrange.map((arrange, i) => {
+                        return <div className='arrangeItem'>
+                            <div className='arrangeOwner'>
+                                {arrange.owner}
+                            </div>
+                            <div className='arrangePercent'>
+                                <EditablePercent value={arrange.percentage ?? 0}
+                                                 setValue={(value) => props.setWorkItem({ ...props.workItem, percentage: value })} />
+                            </div>
+                            <div className='arrangeActualPercent'>
+                                <EditablePercent value={arrange.actualPercentage ?? 0}
+                                                 setValue={(value) => props.setWorkItem({ ...props.workItem, percentage: value })} />
+                            </div>
+                        </div>
+                    }) : <></>
+            }
+        </div>
 
     </div>
 }

@@ -7,7 +7,7 @@
 .itemInfo {
     display: grid;
     grid-template-columns: 70% 30%;
-    width: 30%;
+    width: 50%;
     border-right: 1px solid #888888;
 }
 
@@ -19,6 +19,38 @@
 }
 
 .itemPercent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrangeContainer {
+    width: 50%;
+}
+
+.arrangeItem {
+    width: 100%;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    border-bottom: 1px solid #888888;
+}
+
+.arrangeOwner {
+    border-right: 1px solid #888888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrangePercent {
+    border-right: 1px solid #888888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrangeActualPercent {
     display: flex;
     justify-content: center;
     align-items: center;
