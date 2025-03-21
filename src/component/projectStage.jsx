@@ -38,21 +38,15 @@ function ProjectStage(props) {
         })
     }
 
-    const addNewNode = () => {
-        const newNode = props.stage.nodes && props.stage.nodes > 0 ? [...props.stage.nodes, {
-            nodeIndex: props.stage.nodes.at(-1).nodeIndex + 1,
-            nodeName: '',
-            percentage: 0,
-            workItems: [],
-        }] : [{
-            nodeIndex: 1,
-            nodeName: '',
-            percentage: 0,
-            workItems: [],
-        }]
+    const initNewNode = () => {
         props.setStage({
             ...props.stage,
-            nodes: newNode,
+            nodes: [{
+                nodeIndex: 1,
+                nodeName: '',
+                percentage: 0,
+                workItems: [],
+            }],
         })
     }
 
@@ -67,7 +61,7 @@ function ProjectStage(props) {
             {props.stage.nodes && props.stage.nodes.length > 0 ?
                 props.stage.nodes.map((node, index) => {
                     return <ProjectNode node={node} index={index} setNode={setNode} num={participantNums[node.nodeIndex]}/>
-                }) : <div className='emptyNodes' onClick={addNewNode}></div>
+                }) : <div className='emptyNodes' onClick={initNewNode}></div>
             }
         </div>
         <div onClick={() => props.removeStage(props.stage.stageIndex)} className='removeContainer'>

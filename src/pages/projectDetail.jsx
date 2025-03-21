@@ -34,7 +34,7 @@ export default function ProjectDetail() {
             nodes: [],
         }] : [{
             stageIndex: 1,
-            stageName: '',
+            stageName: '阶段1',
             percentage: 0,
             nodes: [],
         }]
@@ -52,6 +52,30 @@ export default function ProjectDetail() {
                     ...item,
                     stageIndex: item.stageIndex - 1,
                 }),
+        })
+    }
+
+    const insertStage = (stageIndex) => {
+        const insertIndex = project.stages.findIndex(stage => stage.stageIndex === stageIndex)
+        if (insertIndex === -1) {
+            return
+        }
+        const newStages = [
+            ...project.stages.slice(0, insertIndex),
+            {
+                stageIndex: stageIndex,
+                stageName: '阶段' + stageIndex,
+                percentage: 0,
+                nodes: [],
+            },
+            ...project.stages.slice(insertIndex).map(stage => ({
+                ...stage,
+                stageIndex: stage.stageIndex + 1
+            })),
+        ]
+        setProject({
+            ...project,
+            stages: newStages,
         })
     }
 

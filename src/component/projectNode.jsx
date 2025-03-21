@@ -14,6 +14,18 @@ function ProjectNode(props) {
         })
     }
 
+    const initNewWorkItem = () => {
+        props.setNode({
+            ...props.node,
+            workItems: [{
+                itemIndex: 1,
+                itemName: '',
+                percentage: 0,
+                arrange: [],
+            }],
+        })
+    }
+
     return <div className='nodeContainer' style={{ height: `${props.num * 50}px` }}>
         <div className='nodeInfo'>
             <div className='nodeName'>
@@ -30,7 +42,7 @@ function ProjectNode(props) {
                 props.node.workItems && props.node.workItems.length > 0 ?
                 props.node.workItems.map((item) => {
                     return <WorkItem workItem={item} setWorkItem={setWorkItem} totalNum={props.num} />
-                }) : <></>
+                }) : <div className='emptyWorkItem' onClick={initNewWorkItem}></div>
             }
         </div>
     </div>
