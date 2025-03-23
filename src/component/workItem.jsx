@@ -8,6 +8,17 @@ function WorkItem(props) {
     const num = props.workItem.arrange?.length || 1
     const height = (num / props.totalNum) * 100
 
+    const initNewArrange = () => {
+        props.setWorkItem({
+            ...props.workItem,
+            arrange: [{
+                owner: '',
+                percentage: 0,
+                actualPercentage: 0,
+            }],
+        })
+    }
+
     return <div className='itemContainer' style={{ height: `${height}%`, minHeight: `${num * 40}px` }}>
         <div className='itemInfo'>
             <div className='itemName'>
@@ -36,7 +47,7 @@ function WorkItem(props) {
                                                  setValue={(value) => props.setWorkItem({ ...props.workItem, percentage: value })} />
                             </div>
                         </div>
-                    }) : <></>
+                    }) : <div className='emptyArrange' onClick={initNewArrange} ></div>
             }
         </div>
 
