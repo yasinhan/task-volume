@@ -5,6 +5,8 @@ import ProjectStage from '@/component/projectStage'
 import EditableText from '@/component/common/editableText'
 import './project.css'
 import { PlusOutlined } from '@ant-design/icons'
+import { partnerApi } from '@/api/partnerApi'
+import { ProjectContext } from '@/component/context/partnerContext'
 
 export default function ProjectDetail() {
     const { id } = useParams()
@@ -17,7 +19,20 @@ export default function ProjectDetail() {
         projectApi.getProject(id).then((res) => {
             setProject(res)
         })
+        partnerApi.getAllPartner().then(res => {
+            setPartners(res.map(p => {
+                return { label: p, value: p }
+            }))
+        })
     }, [id])
+
+    const addPartner = name => {
+        partnerApi.addPartner(name).then((res) => {
+            setPartners((res.map(p => {
+                return { label: p, value: p }
+            })))
+        })
+    }
 
     const saveProject = () => {
         projectApi.saveProject(project).then(() => {
@@ -71,7 +86,7 @@ export default function ProjectDetail() {
             },
             ...project.stages.slice(insertIndex).map(stage => ({
                 ...stage,
-                stageIndex: stage.stageIndex + 1
+                stageIndex: stage.stageIndex + 1,
             })),
         ]
         setProject({
@@ -92,21 +107,22 @@ export default function ProjectDetail() {
         saveProject()
     }
 
-    return <div className='page'>
-        <button onClick={back}>返回</button>
-        <div className='header'>
-            <div className='nameTitle'>
-                项目名称:
+    return <ProjectContext.Provider value={{ saveProject, addPartner, partners }}>
+        <div className="page">
+            <button onClick={back}>返回</button>
+            <div className="header">
+                <div className="nameTitle">
+                    项目名称:
+                </div>
+                <EditableText value={project.projectName ?? '空项目'}
+                              setValue={(value) => setProject({ ...project, projectName: value })} />
             </div>
-            <EditableText value={project.projectName ?? '空项目'}
-                          setValue={(value) => setProject({ ...project, projectName: value })} />
+            {
+                project.stages && project.stages.map((stage, index) => {
+                    return <ProjectStage stage={stage} key={index} setStage={updateStage} removeStage={removeStage} />
+                })
+            }
+            <div className="addStageContainer" onClick={addStage}><PlusOutlined />添加阶段</div>
         </div>
-        {
-            project.stages && project.stages.map((stage, index) => {
-                return <ProjectStage stage={stage} key={index} setStage={updateStage} removeStage={removeStage} />
-            })
-        }
-        <div className='addStageContainer' onClick={addStage}><PlusOutlined />添加阶段</div>
-    </div>
-
+    </ProjectContext.Provider>
 }
