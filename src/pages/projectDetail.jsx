@@ -11,6 +11,7 @@ export default function ProjectDetail() {
     const navigate = useNavigate()
 
     const [project, setProject] = useState({})
+    const [partners, setPartners] = useState([])
 
     useEffect(() => {
         projectApi.getProject(id).then((res) => {

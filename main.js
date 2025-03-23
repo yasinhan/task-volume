@@ -81,6 +81,32 @@ ipcMain.handle('project:save', async (event, project) => {
     writeFile(content)
 })
 
+ipcMain.handle('partner:getAll', async () => {
+    const content = await readFile()
+    return content['partners']
+})
+
+ipcMain.handle('partner:addNew', async (event, name) => {
+    const content = await readFile()
+    const prevPartners = content['partners']
+    if (!prevPartners || prevPartners.length === 0) {
+        content['partners'] = [name]
+        writeFile(content)
+        return [name]
+    } else {
+        const exist = prevPartners.find(item => item === name)
+        if (exist) {
+            return prevPartners
+        } else {
+            prevPartners.push(name)
+            content['partners'] = prevPartners
+            writeFile(content)
+            return prevPartners
+        }
+    }
+})
+
+
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {

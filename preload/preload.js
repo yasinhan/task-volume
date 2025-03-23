@@ -6,3 +6,8 @@ contextBridge.exposeInMainWorld('projectAPI', {
     get: (id) => ipcRenderer.invoke('project:get', id),
     save: (project) => ipcRenderer.invoke('project:save', project),
 })
+
+contextBridge.exposeInMainWorld('partnerAPI', {
+    getAll: () => ipcRenderer.invoke('partner:getAll'),
+    create: (name) => ipcRenderer.invoke('partner:addNew', name),
+})
