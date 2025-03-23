@@ -19,6 +19,10 @@ function WorkItem(props) {
         })
     }
 
+    const handleArrangeChange = (value, index, field) => {
+
+    }
+
     return <div className='itemContainer' style={{ height: `${height}%`, minHeight: `${num * 40}px` }}>
         <div className='itemInfo'>
             <div className='itemName'>
