@@ -2,6 +2,7 @@ import React from 'react'
 import EditableText from '@/component/common/editableText'
 import './workItem.css'
 import EditablePercent from '@/component/common/editablePercent'
+import {useProject} from "@/component/context/partnerContext";
 
 function WorkItem(props) {
 
@@ -18,6 +19,8 @@ function WorkItem(props) {
             }],
         })
     }
+
+    const { parters, addPartner, saveProject } = useProject()
 
     const handleArrangeChange = (value, index, field) => {
 
