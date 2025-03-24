@@ -1,0 +1,13 @@
+/* 强制限制 .ant-select-selector 高度 */
+.fixed-select .ant-select-selector {
+    height: 35px !important;
+    overflow-y: auto !important;
+    display: flex;
+    align-items: center;
+}
+
+/* 控制标签项在 selector 中不挤爆 */
+.fixed-select .ant-select-selection-overflow {
+    max-height: 100%;
+    overflow-y: auto;
+}

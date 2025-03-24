@@ -20,7 +20,9 @@
                   "percentage": 50,
                   "arrange": [
                     {
-                      "owner": "Nicole",
+                      "owner": [
+                        "Nicole"
+                      ],
                       "percentage": 100,
                       "actualPercent": 0
                     }
@@ -32,12 +34,16 @@
                   "percentage": 50,
                   "arrange": [
                     {
-                      "owner": "Nicole",
+                      "owner": [
+                        "Nicole"
+                      ],
                       "percentage": 80,
                       "actualPercent": 0
                     },
                     {
-                      "owner": "JingChen",
+                      "owner": [
+                        "JingChen"
+                      ],
                       "percentage": 50,
                       "actualPercent": 0
                     }
@@ -63,6 +69,7 @@
   ],
   "partners": [
     "Nicole",
-    "JingChen"
+    "JingChen",
+    "Qin"
   ]
 }

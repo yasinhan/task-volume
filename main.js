@@ -106,7 +106,6 @@ ipcMain.handle('partner:addNew', async (event, name) => {
     }
 })
 
-
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {

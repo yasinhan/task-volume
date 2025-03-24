@@ -7,7 +7,7 @@
 .itemInfo {
     display: grid;
     grid-template-columns: 70% 30%;
-    width: 50%;
+    width: 30%;
     border-right: 1px solid #888888;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .arrangeContainer {
-    width: 50%;
+    width: 70%;
 }
 
 .arrangeItem {
