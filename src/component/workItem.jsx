@@ -4,6 +4,7 @@ import './workItem.css'
 import EditablePercent from '@/component/common/editablePercent'
 import { useProject } from '@/component/context/partnerContext'
 import EditableSelect from '@/component/common/editableSelect'
+import { Dropdown, Menu } from 'antd'
 
 function WorkItem(props) {
 
@@ -23,6 +24,19 @@ function WorkItem(props) {
 
     const { partners, addPartner, saveProject } = useProject()
 
+    const handleItemMenuClick = () => {
+
+    }
+
+    const workItemMenu = (
+        <Menu
+            onClick={handleItemMenuClick}
+            items={[
+
+            ]}
+        />
+    )
+
     const handleArrangeChange = (value, index, field) => {
         const newArrange = props.workItem.arrange.map((item, i) => i === index ? {
             ...item,
@@ -36,10 +50,12 @@ function WorkItem(props) {
 
     return <div className="itemContainer" style={{ height: `${height}%`, minHeight: `${num * 40}px` }}>
         <div className="itemInfo">
-            <div className="itemName">
-                <EditableText value={props.workItem.itemName ?? '工作项'}
-                              setValue={(value) => props.setWorkItem({ ...props.workItem, itemName: value })} />
-            </div>
+            <Dropdown>
+                <div className="itemName">
+                    <EditableText value={props.workItem.itemName ?? '工作项'}
+                                  setValue={(value) => props.setWorkItem({ ...props.workItem, itemName: value })} />
+                </div>
+            </Dropdown>
             <div className="itemPercent">
                 <EditablePercent value={props.workItem.percentage ?? 0}
                                  setValue={(value) => props.setWorkItem({ ...props.workItem, percentage: value })} />
