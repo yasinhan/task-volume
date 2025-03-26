@@ -40,8 +40,8 @@ function ProjectNode(props) {
         <div className='workItem'>
             {
                 props.node.workItems && props.node.workItems.length > 0 ?
-                props.node.workItems.map((item) => {
-                    return <WorkItem workItem={item} setWorkItem={setWorkItem} totalNum={props.num} />
+                props.node.workItems.map((item, index) => {
+                    return <WorkItem key={index} workItem={item} setWorkItem={setWorkItem} totalNum={props.num} />
                 }) : <div className='emptyWorkItem' onClick={initNewWorkItem}></div>
             }
         </div>

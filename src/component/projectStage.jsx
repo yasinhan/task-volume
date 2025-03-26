@@ -60,7 +60,7 @@ function ProjectStage(props) {
         <div className='nodes'>
             {props.stage.nodes && props.stage.nodes.length > 0 ?
                 props.stage.nodes.map((node, index) => {
-                    return <ProjectNode node={node} index={index} setNode={setNode} num={participantNums[node.nodeIndex]}/>
+                    return <ProjectNode key={index} node={node} setNode={setNode} num={participantNums[node.nodeIndex]}/>
                 }) : <div className='emptyNodes' onClick={initNewNode}></div>
             }
         </div>

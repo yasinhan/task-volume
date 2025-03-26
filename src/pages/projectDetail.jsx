@@ -7,6 +7,8 @@ import './project.css'
 import { PlusOutlined } from '@ant-design/icons'
 import { partnerApi } from '@/api/partnerApi'
 import { ProjectContext } from '@/component/context/partnerContext'
+import { calculateWorkVolume } from '@/util/Calculator'
+import { Volume } from '@/component/participantsVolume'
 
 export default function ProjectDetail() {
     const { id } = useParams()
@@ -14,10 +16,13 @@ export default function ProjectDetail() {
 
     const [project, setProject] = useState({})
     const [partners, setPartners] = useState([])
+    const [volume, setVolume] = useState({})
 
     useEffect(() => {
         projectApi.getProject(id).then((res) => {
             setProject(res)
+            const partnersVolume = calculateWorkVolume(res)
+            setVolume(partnersVolume)
         })
         partnerApi.getAllPartner().then(res => {
             setPartners(res.map(p => {
@@ -123,6 +128,7 @@ export default function ProjectDetail() {
                 })
             }
             <div className="addStageContainer" onClick={addStage}><PlusOutlined />添加阶段</div>
+            <Volume volume={volume} />
         </div>
     </ProjectContext.Provider>
 }
