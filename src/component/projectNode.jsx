@@ -27,7 +27,7 @@ function ProjectNode(props) {
     }
 
     const insertNewWorkItem = (itemIndex) => {
-        const insertIndex = props.node.workItems.findIndex(item => item.itemIndex === itemIndex)
+        const insertIndex = props.node.workItems.findIndex(item => item.itemIndex === itemIndex) + 1
         if (insertIndex === -1) {
             return
         }
@@ -44,7 +44,6 @@ function ProjectNode(props) {
                 itemIndex: item.itemIndex + 1,
             })),
         ]
-        console.log(newItems)
         props.setNode({
             ...props.node,
             workItems: newItems,
