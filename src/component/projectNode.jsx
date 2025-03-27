@@ -77,8 +77,9 @@ function ProjectNode(props) {
         <div className='workItem'>
             {
                 props.node.workItems && props.node.workItems.length > 0 ?
-                    props.node.workItems.map((item) => {
+                    props.node.workItems.map((item, index) => {
                         return <WorkItem
+                            key={index}
                             workItem={item}
                             setWorkItem={setWorkItem}
                             totalNum={props.num}
