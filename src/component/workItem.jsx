@@ -36,11 +36,11 @@ function WorkItem(props) {
 
     const workItemMenuItem = [
         {
-            label: '插入',
+            label: '插入新项',
             key: '1',
         },
         {
-            label: '删除',
+            label: '删除工作项',
             key: '2',
         }
     ]
@@ -63,7 +63,7 @@ function WorkItem(props) {
                     items: workItemMenuItem,
                     onClick: handleItemMenuClick,
                 }}
-                trigger={["click"]}>
+                trigger={["contextMenu"]}>
                 <div className="itemName" onClick={e => {
                     e.preventDefault()
                 }}>

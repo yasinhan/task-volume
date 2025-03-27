@@ -13,7 +13,7 @@ export default function EditableSelect(props) {
     }
 
     return <Select
-        style={{width: '90%', height: '35px'}}
+        style={{width: '80%', height: '35px'}}
         mode='tags'
         options={props.options}
         value={props.value}

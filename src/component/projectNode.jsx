@@ -3,6 +3,7 @@ import EditableText from '@/component/common/editableText'
 import './projectNode.css'
 import EditablePercent from '@/component/common/editablePercent'
 import WorkItem from '@/component/workItem'
+import { Dropdown } from 'antd'
 
 function ProjectNode(props) {
 
@@ -10,7 +11,7 @@ function ProjectNode(props) {
         const newItems = props.node.workItems.map(item => item.itemIndex === workItem.itemIndex ? workItem : item)
         props.setNode({
             ...props.node,
-            workItems: newItems
+            workItems: newItems,
         })
     }
 
@@ -62,18 +63,47 @@ function ProjectNode(props) {
         })
     }
 
-    return <div className='nodeContainer' style={{height: `${props.num * 50}px`}}>
-        <div className='nodeInfo'>
-            <div className='nodeName'>
-                <EditableText value={props.node.nodeName ?? '节点'}
-                              setValue={(value) => props.setNode({...props.node, nodeName: value})}/>
-            </div>
-            <div className='nodePercent'>
+
+    const handleItemMenuClick = ({ key }) => {
+        if (key === '1') {
+            props.insertNewNode(props.node.nodeIndex)
+        }
+        if (key === '2') {
+            props.deleteNode(props.node.nodeIndex)
+        }
+
+    }
+
+    const nodeMenuItem = [
+        {
+            label: '插入新节点',
+            key: '1',
+        },
+        {
+            label: '删除节点',
+            key: '2',
+        },
+    ]
+
+    return <div className="nodeContainer" style={{ height: `${props.num * 50}px` }}>
+        <div className="nodeInfo">
+            <Dropdown
+                menu={{
+                    items: nodeMenuItem,
+                    onClick: handleItemMenuClick,
+                }}
+                trigger={['contextMenu']}>
+                <div className="nodeName" onClick={e => e.preventDefault()}>
+                    <EditableText value={props.node.nodeName ?? '节点'}
+                                  setValue={(value) => props.setNode({ ...props.node, nodeName: value })} />
+                </div>
+            </Dropdown>
+            <div className="nodePercent">
                 <EditablePercent value={props.node.percentage ?? 0}
-                                 setValue={(value) => props.setNode({...props.node, percentage: value})}/>
+                                 setValue={(value) => props.setNode({ ...props.node, percentage: value })} />
             </div>
         </div>
-        <div className='workItem'>
+        <div className="workItem">
             {
                 props.node.workItems && props.node.workItems.length > 0 ?
                     props.node.workItems.map((item, index) => {
@@ -85,7 +115,7 @@ function ProjectNode(props) {
                             insertNewWorkItem={insertNewWorkItem}
                             deleteWorkItem={deleteWorkItem}
                         />
-                    }) : <div className='emptyWorkItem' onClick={initNewWorkItem}></div>
+                    }) : <div className="emptyWorkItem" onClick={initNewWorkItem}></div>
             }
         </div>
     </div>
