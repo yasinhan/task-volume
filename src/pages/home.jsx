@@ -41,7 +41,7 @@ export default function Home() {
             </div>
             { projects && projects.length > 0 && projects.map((project, i) => {
                 if (i <= 5) {
-                    return <ProjectThumbnail project={project} switch={() => switchToProject(project.id)} />
+                    return <ProjectThumbnail key={project.id} project={project} switch={() => switchToProject(project.id)} />
                 }
             })}
         </div>
