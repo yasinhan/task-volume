@@ -6,17 +6,29 @@ export function calculateWorkVolume(project) {
         if (participantsVolume[ownerKey]) {
             participantsVolume[ownerKey].percent += percent
             participantsVolume[ownerKey].actualPercent += actualPercent
-            participantsVolume[ownerKey].items.push(workName)
+            participantsVolume[ownerKey].items.push({workName, percent, actualPercent})
         } else {
             participantsVolume[ownerKey] = {
                 percent: percent,
                 actualPercent: actualPercent,
-                items: [workName]
+                items: [{workName, percent, actualPercent}]
             }
         }
 
         if (workItem[workName]) {
-
+            workItem[workName].partners.push({
+                name: ownerKey,
+                percent: percent,
+                actualPercent: actualPercent,
+            })
+        } else {
+            workItem[workName] = {
+                partners: [{
+                    name: ownerKey,
+                    percent: percent,
+                    actualPercent: actualPercent,
+                }]
+            }
         }
     }
 
@@ -36,5 +48,5 @@ export function calculateWorkVolume(project) {
         })
     })
 
-    return participantsVolume
+    return { participantsVolume, workItem }
 }

@@ -21,8 +21,9 @@ export default function ProjectDetail() {
     useEffect(() => {
         projectApi.getProject(id).then((res) => {
             setProject(res)
-            const partnersVolume = calculateWorkVolume(res)
-            setVolume(partnersVolume)
+            const { participantsVolume, workItem } = calculateWorkVolume(res)
+            console.log(participantsVolume, workItem)
+            setVolume(participantsVolume)
         })
         partnerApi.getAllPartner().then(res => {
             setPartners(res.map(p => {
