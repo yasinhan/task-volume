@@ -56,6 +56,50 @@ function WorkItem(props) {
         })
     }
 
+    const arrangeMenuItem = [
+        {
+            label: '新增成员',
+            key: '1',
+        },
+        {
+            label: '删除成员',
+            key: '2',
+        }
+    ]
+
+    const handleArrangeMenuClick = (key, index) => {
+        if (key === '1') {
+            addNewArrange(index)
+        }
+        if (key === '2') {
+            deleteArrange(index)
+        }
+    }
+
+    const addNewArrange = index => {
+        const newArrange = [
+            ...props.workItem.arrange.slice(0, index + 1),
+            {
+                owner: [],
+                percentage: 0,
+                actualPercentage: 0,
+            },
+            ...props.workItem.arrange.slice(index + 1),
+        ]
+        props.setWorkItem({
+            ...props.workItem,
+            arrange: newArrange,
+        })
+    }
+
+    const deleteArrange = index => {
+        const newArrange = props.workItem.arrange.filter((item, i) => i !== index)
+        props.setWorkItem({
+            ...props.workItem,
+            arrange: newArrange,
+        })
+    }
+
     return <div className="itemContainer" style={{height: `${height}%`, minHeight: `${num * 40}px`}}>
         <div className="itemInfo">
             <Dropdown
@@ -81,12 +125,19 @@ function WorkItem(props) {
                 props.workItem.arrange && props.workItem.arrange.length > 0 ?
                     props.workItem.arrange.map((arrange, i) => {
                         return <div className="arrangeItem">
-                            <div className="arrangeOwner">
-                                <EditableSelect value={arrange.owner}
-                                                setValue={value => handleArrangeChange(value, i, 'owner')}
-                                                addNewValue={addPartner}
-                                                options={partners}/>
-                            </div>
+                            <Dropdown
+                                menu={{
+                                    items: arrangeMenuItem,
+                                    onClick: ({key}) => handleArrangeMenuClick(key, i),
+                                }}
+                                trigger={["contextMenu"]}>
+                                <div className="arrangeOwner">
+                                    <EditableSelect value={arrange.owner}
+                                                    setValue={value => handleArrangeChange(value, i, 'owner')}
+                                                    addNewValue={addPartner}
+                                                    options={partners}/>
+                                </div>
+                            </Dropdown>
                             <div className="arrangePercent">
                                 <EditablePercent value={arrange.percentage ?? 0}
                                                  setValue={value => handleArrangeChange(value, i, 'percentage')}/>
