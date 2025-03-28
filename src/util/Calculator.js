@@ -1,17 +1,22 @@
 export function calculateWorkVolume(project) {
-    const res = {}
+    const participantsVolume = {}
+    const workItem = {}
 
-    const recordRes = (key, actualPercent, percent, workName) => {
-        if (res[key]) {
-            res[key].percent += percent
-            res[key].actualPercent += actualPercent
-            res[key].items.push(workName)
+    const recordRes = (ownerKey, actualPercent, percent, workName) => {
+        if (participantsVolume[ownerKey]) {
+            participantsVolume[ownerKey].percent += percent
+            participantsVolume[ownerKey].actualPercent += actualPercent
+            participantsVolume[ownerKey].items.push(workName)
         } else {
-            res[key] = {
+            participantsVolume[ownerKey] = {
                 percent: percent,
                 actualPercent: actualPercent,
                 items: [workName]
             }
+        }
+
+        if (workItem[workName]) {
+
         }
     }
 
@@ -31,5 +36,5 @@ export function calculateWorkVolume(project) {
         })
     })
 
-    return res
+    return participantsVolume
 }

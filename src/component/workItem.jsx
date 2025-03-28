@@ -124,7 +124,7 @@ function WorkItem(props) {
             {
                 props.workItem.arrange && props.workItem.arrange.length > 0 ?
                     props.workItem.arrange.map((arrange, i) => {
-                        return <div className="arrangeItem">
+                        return <div className="arrangeItem" key={i}>
                             <Dropdown
                                 menu={{
                                     items: arrangeMenuItem,
