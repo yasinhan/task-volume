@@ -3,6 +3,12 @@
 }
 
 .volumeRow {
-    display: flex;
+    display: grid;
+    grid-template-columns: 10% 45% 45%;
     width: 100%;
+}
+
+.volumeTitle {
+    display: flex;
+
 }

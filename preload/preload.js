@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('projectAPI', {
     create: (id) => ipcRenderer.invoke('project:addNew', id),
     get: (id) => ipcRenderer.invoke('project:get', id),
     save: (project) => ipcRenderer.invoke('project:save', project),
+    delete: (id) => ipcRenderer.invoke('project:delete', id),
 })
 
 contextBridge.exposeInMainWorld('partnerAPI', {

@@ -77,7 +77,27 @@ ipcMain.handle('project:get', async (event, id) => {
 ipcMain.handle('project:save', async (event, project) => {
     const content = await readFile()
     const prevProjects = content['projects']
-    content['projects'] = prevProjects.map(item => item.id === project.id ? project : item)
+    const exist = prevProjects.find(item => item.id === project.id)
+    if (exist) {
+        content['projects'] = prevProjects.map(item => item.id === project.id ? project : item).sort((a, b) => a.id - b.id)
+    } else {
+        content['projects'] = [...prevProjects, project].sort((a, b) => a.id - b.id)
+    }
+    writeFile(content)
+})
+
+ipcMain.handle('project:delete', async (event, id) => {
+    const content = await readFile()
+    const prevProjects = content['projects']
+    const toDeleteProject = prevProjects.find(item => item.id === id)
+    if (toDeleteProject) {
+        content['projects'] = prevProjects.filter(item => item.id !== id)
+        if (content['trash']) {
+            content['trash'].push(toDeleteProject)
+        } else {
+            content['trash'] = [toDeleteProject]
+        }
+    }
     writeFile(content)
 })
 

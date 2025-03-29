@@ -31,7 +31,6 @@ function WorkItem(props) {
         if (key === '2') {
             props.deleteWorkItem(props.workItem.itemIndex)
         }
-
     }
 
     const workItemMenuItem = [
