@@ -108,6 +108,11 @@ export default function ProjectDetail() {
         })
     }
 
+    const handleProjectChange = project => {
+        setProject(project)
+
+    }
+
     const back = () => {
         navigate(`/`)
         saveProject()
