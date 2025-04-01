@@ -2,13 +2,43 @@
 
 }
 
-.volumeRow {
+.volumeHeader {
     display: grid;
-    grid-template-columns: 10% 45% 45%;
-    width: 100%;
+    grid-template-columns: 20% 40% 40%;
+    border: 1px solid #888888;
 }
 
-.volumeTitle {
+.volumeCell {
+    width: 100%;
+    height: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #888888;
+}
 
+.volumeLastCell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.volumeRow {
+    display: grid;
+    grid-template-columns: 20% 40% 40%;
+    width: 100%;
+    border-right: 1px solid #888888;
+    border-left: 1px solid #888888;
+    border-bottom: 1px solid #888888;
+}
+
+.contentCell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-right: 1px solid #888888;
 }

@@ -22,7 +22,6 @@ export default function ProjectDetail() {
         projectApi.getProject(id).then((res) => {
             setProject(res)
             const { participantsVolume, workItem } = calculateWorkVolume(res)
-            console.log(participantsVolume, workItem)
             setVolume(participantsVolume)
         })
         partnerApi.getAllPartner().then(res => {
