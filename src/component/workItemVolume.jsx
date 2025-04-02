@@ -1,8 +1,8 @@
 import React from 'react'
 import './volumn.css'
 
-export function Volume(props) {
-    return <div className='volumeContainer'>
+export function WorkItemVolume(props) {
+    return <div className='volumnContainer'>
         <div className='volumeHeader'>
             <div className='volumeCell'>
                 参与人
@@ -21,10 +21,10 @@ export function Volume(props) {
                         {key}
                     </div>
                     <div className='contentCell'>
-                        <div style={{width: `${value.percent * 100}%`, height: '80%', background: '#3c9055'}}></div>
+                        <div style={{width: `${value.percent * 100}%`, height: '80%', background: '#95EC69'}}></div>
                     </div>
                     <div className='volumeLastCell'>
-                        <div style={{width: `${value.actualPercent * 100}%`, height: '80%', background: '#3c9055'}}></div>
+                        <div style={{width: `${value.actualPercent * 100}%`, height: '80%', background: '#95EC69'}}></div>
                     </div>
                 </div>
             })

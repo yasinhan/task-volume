@@ -7,7 +7,7 @@ import './project.css'
 import { PlusOutlined } from '@ant-design/icons'
 import { partnerApi } from '@/api/partnerApi'
 import { ProjectContext } from '@/component/context/partnerContext'
-import { calculateWorkVolume } from '@/util/Calculator'
+import { calculateWorkVolume } from '@/util/calculator'
 import { Volume } from '@/component/participantsVolume'
 
 export default function ProjectDetail() {
@@ -17,12 +17,14 @@ export default function ProjectDetail() {
     const [project, setProject] = useState({})
     const [partners, setPartners] = useState([])
     const [volume, setVolume] = useState({})
+    const [workItemCalc, setWorkItemCalc] = useState({})
 
     useEffect(() => {
         projectApi.getProject(id).then((res) => {
             setProject(res)
             const { participantsVolume, workItem } = calculateWorkVolume(res)
             setVolume(participantsVolume)
+            setWorkItemCalc(workItem)
         })
         partnerApi.getAllPartner().then(res => {
             setPartners(res.map(p => {
