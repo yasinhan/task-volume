@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import ProjectThumbnail from '@/component/projectThumbnail'
 import './home.css'
-import {projectApi} from '@/api/projectApi'
-import {useNavigate} from 'react-router-dom'
-import {Dropdown} from 'antd'
+import { projectApi } from '@/api/projectApi'
+import { useNavigate } from 'react-router-dom'
+import { Dropdown } from 'antd'
 
-export default function Home() {
+export default function ProjectList() {
     const [projects, setProjects] = useState([])
 
     const navigate = useNavigate()
 
     const loadProjects = async () => {
-        const res = await projectApi.getLatestProjects(5)
+        const res = await projectApi.getAllProjects()
         setProjects(res)
     }
 
@@ -26,10 +26,6 @@ export default function Home() {
         if (newProject && newProject.id) {
             navigate(`/detail/${newProject.id}`)
         }
-    }
-
-    const handleNavigateAllProjects = async () => {
-        navigate(`/`)
     }
 
     const copyNewProject = async projectId => {
@@ -80,7 +76,7 @@ export default function Home() {
             <div className="title">
                 最近项目
             </div>
-            <div className="description" onClick={handleItemMenuClick}>
+            <div>
                 查看全部
             </div>
         </div>
@@ -90,14 +86,16 @@ export default function Home() {
                 +New
             </div>
             {projects && projects.length > 0 && projects.map((project, i) => {
-                return <Dropdown
-                    menu={{
-                        items: projectMenuItem,
-                        onClick: ({key}) => handleItemMenuClick(key, project.id),
-                    }}>
-                    <ProjectThumbnail key={project.id} project={project}
-                                      switch={() => switchToProject(project.id)}/>
-                </Dropdown>
+                if (i <= 5) {
+                    return <Dropdown
+                        menu={{
+                            items: projectMenuItem,
+                            onClick: ({key}) => handleItemMenuClick(key, project.id),
+                        }}>
+                        <ProjectThumbnail key={project.id} project={project}
+                                          switch={() => switchToProject(project.id)} />
+                    </Dropdown>
+                }
             })}
         </div>
     </div>
