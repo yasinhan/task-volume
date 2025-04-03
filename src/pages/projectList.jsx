@@ -19,6 +19,21 @@ export default function ProjectList() {
         loadProjects()
     }, [])
 
+    const columns = [
+        {
+            title: '项目名称',
+            dataIndex: 'projectName',
+        },
+        {
+            title: '创建时间',
+            dataIndex: 'createTime',
+        },
+        {
+            title: '最后更新时间',
+            dataIndex: 'updateTime',
+        }
+    ]
+
     const handleAddNewProject = async () => {
         const newId = projects.length > 0 ? projects.at(-1).id + 1 : 1
 
@@ -55,7 +70,7 @@ export default function ProjectList() {
         {
             label: '删除项目',
             key: '2',
-        }
+        },
     ]
 
     const handleItemMenuClick = async (key, projectId) => {
@@ -90,7 +105,7 @@ export default function ProjectList() {
                     return <Dropdown
                         menu={{
                             items: projectMenuItem,
-                            onClick: ({key}) => handleItemMenuClick(key, project.id),
+                            onClick: ({ key }) => handleItemMenuClick(key, project.id),
                         }}>
                         <ProjectThumbnail key={project.id} project={project}
                                           switch={() => switchToProject(project.id)} />
