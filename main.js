@@ -62,22 +62,25 @@ ipcMain.handle('project:getLatest', async (event, number) => {
 })
 
 
-ipcMain.handle('project:addNew', async (event, id) => {
+ipcMain.handle('project:addNew', async () => {
     const content = await readFile()
-    const projects = content['projects']
-    const exist = projects.find(item => item.id === id)
-    if (exist) {
-        return exist
-    }
-    projects.push({
-        id: id,
+    const lastId = content['lastId']
+
+    const newId = lastId ? lastId + 1 : 1
+
+    const newProject = {
+        id: newId,
         createTime: dayjs().format(STANDARD_FORMAT),
         updateTime: dayjs().format(STANDARD_FORMAT),
-    })
+    }
+
+    const projects = content['projects']
+    projects.push(newProject)
     projects.sort((a, b) => dayjs(b.updateTime, STANDARD_FORMAT).diff(dayjs(a.updateTime, STANDARD_FORMAT)))
     content['projects'] = projects
+    content['lastId'] = newId
     writeFile(content)
-    return { id: id }
+    return { id: newId }
 })
 
 ipcMain.handle('project:get', async (event, id) => {

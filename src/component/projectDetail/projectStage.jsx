@@ -3,7 +3,7 @@ import EditableText from '@/component/common/editableText'
 import './projectStage.css'
 import EditablePercent from '@/component/common/editablePercent'
 import { MinusOutlined } from '@ant-design/icons'
-import ProjectNode from '@/component/projectNode'
+import ProjectNode from '@/component/projectDetail/projectNode'
 
 function ProjectStage(props) {
 

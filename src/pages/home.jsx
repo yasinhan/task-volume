@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import ProjectThumbnail from '@/component/projectThumbnail'
+import ProjectThumbnail from '@/component/projectDetail/projectThumbnail'
 import './home.css'
 import {projectApi} from '@/api/projectApi'
 import {useNavigate} from 'react-router-dom'
@@ -20,9 +20,7 @@ export default function Home() {
     }, [])
 
     const handleAddNewProject = async () => {
-        const newId = projects.length > 0 ? projects.at(-1).id + 1 : 1
-
-        const newProject = await projectApi.createProject(newId)
+        const newProject = await projectApi.createProject()
         if (newProject && newProject.id) {
             navigate(`/detail/${newProject.id}`)
         }
@@ -37,9 +35,10 @@ export default function Home() {
         if (!originProject) {
             return
         }
-        const newId = projects.length > 0 ? projects.at(-1).id + 1 : 1
+        const newId = await projectApi.createProject().id
         const newProject = {
             id: newId,
+            projectName: originProject.projectName + '副本',
             ...originProject,
         }
         projectApi.saveProject(newProject)

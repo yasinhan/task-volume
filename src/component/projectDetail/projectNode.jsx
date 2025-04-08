@@ -2,7 +2,7 @@ import React from 'react'
 import EditableText from '@/component/common/editableText'
 import './projectNode.css'
 import EditablePercent from '@/component/common/editablePercent'
-import WorkItem from '@/component/workItem'
+import WorkItem from '@/component/projectDetail/workItem'
 import { Dropdown } from 'antd'
 
 function ProjectNode(props) {

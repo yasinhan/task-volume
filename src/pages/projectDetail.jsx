@@ -1,14 +1,14 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { projectApi } from '@/api/projectApi'
-import ProjectStage from '@/component/projectStage'
+import ProjectStage from '@/component/projectDetail/projectStage'
 import EditableText from '@/component/common/editableText'
 import './project.css'
 import { PlusOutlined } from '@ant-design/icons'
 import { partnerApi } from '@/api/partnerApi'
 import { ProjectContext } from '@/component/context/partnerContext'
 import { calculateWorkVolume } from '@/util/calculator'
-import { Volume } from '@/component/participantsVolume'
+import { Volume } from '@/component/projectDetail/participantsVolume'
 
 export default function ProjectDetail() {
     const { id } = useParams()

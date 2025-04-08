@@ -1,1 +1,107 @@
-{"projects":[{"id":1,"projectName":"桐庐-民宿","crateTime":"2025-03-15 00:00:00","updateTime":"2025-04-02 22:58:46","stages":[{"stageIndex":1,"stageName":"概念阶段","percentage":30,"nodes":[{"nodeIndex":1,"nodeName":"文本","percentage":40,"workItems":[{"itemIndex":1,"itemName":"沟通","percentage":50,"arrange":[{"owner":["Nicole","JingChen","Jun"],"percentage":50,"actualPercent":0,"actualPercentage":30}]},{"itemIndex":2,"itemName":"手稿","percentage":50,"arrange":[{"owner":["Nicole"],"percentage":80,"actualPercent":0,"actualPercentage":20},{"owner":["JingChen"],"percentage":50,"actualPercent":0}]},{"itemIndex":3,"itemName":"撩骚","percentage":0,"arrange":[]}]}]},{"stageIndex":2,"stageName":"","percentage":0,"nodes":[]}]},{"id":2,"crateTime":"2025-03-15 00:00:00","updateTime":"2025-04-01 08:00:00","stages":[{"stageIndex":1,"stageName":"阶段1","percentage":0,"nodes":[]}]},{"id":3,"crateTime":"2025-03-15 00:00:00","updateTime":"2025-04-01 08:00:00"},{"id":4,"crateTime":"2025-03-15 00:00:00","updateTime":"2025-04-01 08:00:00"}],"partners":["Nicole","JingChen","Qin","Jun"]}
+{
+  "projects": [
+    {
+      "id": 1,
+      "projectName": "桐庐-民宿",
+      "crateTime": "2025-03-15 00:00:00",
+      "updateTime": "2025-04-02 22:58:46",
+      "stages": [
+        {
+          "stageIndex": 1,
+          "stageName": "概念阶段",
+          "percentage": 30,
+          "nodes": [
+            {
+              "nodeIndex": 1,
+              "nodeName": "文本",
+              "percentage": 40,
+              "workItems": [
+                {
+                  "itemIndex": 1,
+                  "itemName": "沟通",
+                  "percentage": 50,
+                  "arrange": [
+                    {
+                      "owner": [
+                        "Nicole",
+                        "JingChen",
+                        "Jun"
+                      ],
+                      "percentage": 50,
+                      "actualPercent": 0,
+                      "actualPercentage": 30
+                    }
+                  ]
+                },
+                {
+                  "itemIndex": 2,
+                  "itemName": "手稿",
+                  "percentage": 50,
+                  "arrange": [
+                    {
+                      "owner": [
+                        "Nicole"
+                      ],
+                      "percentage": 80,
+                      "actualPercent": 0,
+                      "actualPercentage": 20
+                    },
+                    {
+                      "owner": [
+                        "JingChen"
+                      ],
+                      "percentage": 50,
+                      "actualPercent": 0
+                    }
+                  ]
+                },
+                {
+                  "itemIndex": 3,
+                  "itemName": "撩骚",
+                  "percentage": 0,
+                  "arrange": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stageIndex": 2,
+          "stageName": "",
+          "percentage": 0,
+          "nodes": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "crateTime": "2025-03-15 00:00:00",
+      "updateTime": "2025-04-01 08:00:00",
+      "stages": [
+        {
+          "stageIndex": 1,
+          "stageName": "阶段1",
+          "percentage": 0,
+          "nodes": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "crateTime": "2025-03-15 00:00:00",
+      "updateTime": "2025-04-01 08:00:00"
+    },
+    {
+      "id": 4,
+      "crateTime": "2025-03-15 00:00:00",
+      "updateTime": "2025-04-01 08:00:00"
+    }
+  ],
+  "lastId": 4,
+  "partners": [
+    "Nicole",
+    "JingChen",
+    "Qin",
+    "Jun"
+  ]
+}

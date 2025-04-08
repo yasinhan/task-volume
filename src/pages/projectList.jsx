@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import ProjectThumbnail from '@/component/projectThumbnail'
+import ProjectThumbnail from '@/component/projectDetail/projectThumbnail'
 import './home.css'
 import { projectApi } from '@/api/projectApi'
 import { useNavigate } from 'react-router-dom'
-import {Dropdown, Table} from 'antd'
+import { Button, Dropdown, Table } from 'antd'
 
 export default function ProjectList() {
     const [projects, setProjects] = useState([])
@@ -36,15 +36,17 @@ export default function ProjectList() {
             title: '操作',
             key: 'action',
             render: (record) => {
-                return
+                return <div>
+                    <Button onClick={() => switchToProject(record.id)}>查看详情</Button>
+                    <button onClick={() => deleteProject(record.id)}>删除</button>
+                    <Button>复制</Button>
+                </div>
             }
         }
     ]
 
     const handleAddNewProject = async () => {
-        const newId = projects.length > 0 ? projects.at(-1).id + 1 : 1
-
-        await projectApi.createProject(newId)
+        await projectApi.createProject()
         await loadProjects()
     }
 
@@ -65,6 +67,7 @@ export default function ProjectList() {
         <Table
             dataSource={projects}
             columns={columns}
+            pagination={false}
         />
     </div>
 }
