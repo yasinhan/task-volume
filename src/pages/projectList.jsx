@@ -19,24 +19,32 @@ export default function ProjectList() {
         loadProjects()
     }, [])
 
+    const columns = [
+        {
+            title: '项目名称',
+            dataIndex: 'projectName',
+        },
+        {
+            title: '创建时间',
+            dataIndex: 'createTime',
+        },
+        {
+            title: '最后更新时间',
+            dataIndex: 'updateTime',
+        },
+        {
+            title: '操作',
+            key: 'action',
+            render: (record) => {
+                return
+            }
+        }
+    ]
+
     const handleAddNewProject = async () => {
         const newId = projects.length > 0 ? projects.at(-1).id + 1 : 1
 
         await projectApi.createProject(newId)
-        await loadProjects()
-    }
-
-    const copyNewProject = async projectId => {
-        const originProject = projects.find(p => p.id === projectId)
-        if (!originProject) {
-            return
-        }
-        const newId = projects.length > 0 ? projects.at(-1).id + 1 : 1
-        const newProject = {
-            id: newId,
-            ...originProject,
-        }
-        projectApi.saveProject(newProject)
         await loadProjects()
     }
 
@@ -46,21 +54,17 @@ export default function ProjectList() {
     }
 
 
-    const handleItemMenuClick = async (key, projectId) => {
-        if (key === '1') {
-            await copyNewProject(projectId)
-        }
-        if (key === '2') {
-            await deleteProject(projectId)
-        }
-    }
-
     const switchToProject = (id) => {
         navigate(`/detail/${id}`)
     }
 
     return <div className="page">
+        <div>
+
+        </div>
         <Table
+            dataSource={projects}
+            columns={columns}
         />
     </div>
 }

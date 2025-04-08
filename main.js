@@ -1,7 +1,8 @@
 const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 const fs = require('fs')
-
+const dayjs = require('dayjs')
+const STANDARD_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -54,6 +55,13 @@ ipcMain.handle('project:getAll', async () => {
     return content['projects']
 })
 
+ipcMain.handle('project:getLatest', async (event, number) => {
+    const content = await readFile()
+    const projects = content['projects']
+    return projects.slice(0, number + 1)
+})
+
+
 ipcMain.handle('project:addNew', async (event, id) => {
     const content = await readFile()
     const projects = content['projects']
@@ -62,8 +70,11 @@ ipcMain.handle('project:addNew', async (event, id) => {
         return exist
     }
     projects.push({
-        id: id
+        id: id,
+        createTime: dayjs().format(STANDARD_FORMAT),
+        updateTime: dayjs().format(STANDARD_FORMAT),
     })
+    projects.sort((a, b) => dayjs(b.updateTime, STANDARD_FORMAT).diff(dayjs(a.updateTime, STANDARD_FORMAT)))
     content['projects'] = projects
     writeFile(content)
     return { id: id }
@@ -79,9 +90,12 @@ ipcMain.handle('project:save', async (event, project) => {
     const prevProjects = content['projects']
     const exist = prevProjects.find(item => item.id === project.id)
     if (exist) {
-        content['projects'] = prevProjects.map(item => item.id === project.id ? project : item).sort((a, b) => a.id - b.id)
+        content['projects'] = prevProjects.map(item => item.id === project.id ? {
+            ...project,
+            updateTime: dayjs().format(STANDARD_FORMAT),
+        } : item).sort((a, b) => dayjs(b.updateTime, STANDARD_FORMAT).diff(dayjs(a.updateTime, STANDARD_FORMAT)))
     } else {
-        content['projects'] = [...prevProjects, project].sort((a, b) => a.id - b.id)
+        content['projects'] = [...prevProjects, project].sort((a, b) => dayjs(b.updateTime, STANDARD_FORMAT).diff(dayjs(a.updateTime, STANDARD_FORMAT)))
     }
     writeFile(content)
 })

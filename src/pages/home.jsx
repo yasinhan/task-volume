@@ -29,7 +29,7 @@ export default function Home() {
     }
 
     const handleNavigateAllProjects = async () => {
-        navigate(`/`)
+        navigate(`/list`)
     }
 
     const copyNewProject = async projectId => {
@@ -76,11 +76,11 @@ export default function Home() {
     }
 
     return <div className="page">
-        <div>
+        <div className="mainHeader">
             <div className="title">
                 最近项目
             </div>
-            <div className="description" onClick={handleItemMenuClick}>
+            <div className="navAll" onClick={handleNavigateAllProjects}>
                 查看全部
             </div>
         </div>
@@ -89,7 +89,7 @@ export default function Home() {
             <div className="createProject" onClick={handleAddNewProject}>
                 +New
             </div>
-            {projects && projects.length > 0 && projects.map((project, i) => {
+            {projects && projects.length > 0 && projects.map((project) => {
                 return <Dropdown
                     menu={{
                         items: projectMenuItem,
