@@ -3,7 +3,7 @@ import ProjectThumbnail from '@/component/projectThumbnail'
 import './home.css'
 import { projectApi } from '@/api/projectApi'
 import { useNavigate } from 'react-router-dom'
-import { Dropdown } from 'antd'
+import {Dropdown, Table} from 'antd'
 
 export default function ProjectList() {
     const [projects, setProjects] = useState([])
@@ -22,10 +22,8 @@ export default function ProjectList() {
     const handleAddNewProject = async () => {
         const newId = projects.length > 0 ? projects.at(-1).id + 1 : 1
 
-        const newProject = await projectApi.createProject(newId)
-        if (newProject && newProject.id) {
-            navigate(`/detail/${newProject.id}`)
-        }
+        await projectApi.createProject(newId)
+        await loadProjects()
     }
 
     const copyNewProject = async projectId => {
@@ -47,16 +45,6 @@ export default function ProjectList() {
         await loadProjects()
     }
 
-    const projectMenuItem = [
-        {
-            label: '复制项目',
-            key: '1',
-        },
-        {
-            label: '删除项目',
-            key: '2',
-        }
-    ]
 
     const handleItemMenuClick = async (key, projectId) => {
         if (key === '1') {
@@ -72,31 +60,7 @@ export default function ProjectList() {
     }
 
     return <div className="page">
-        <div>
-            <div className="title">
-                最近项目
-            </div>
-            <div>
-                查看全部
-            </div>
-        </div>
-
-        <div className="projectCards">
-            <div className="createProject" onClick={handleAddNewProject}>
-                +New
-            </div>
-            {projects && projects.length > 0 && projects.map((project, i) => {
-                if (i <= 5) {
-                    return <Dropdown
-                        menu={{
-                            items: projectMenuItem,
-                            onClick: ({key}) => handleItemMenuClick(key, project.id),
-                        }}>
-                        <ProjectThumbnail key={project.id} project={project}
-                                          switch={() => switchToProject(project.id)} />
-                    </Dropdown>
-                }
-            })}
-        </div>
+        <Table
+        />
     </div>
 }
